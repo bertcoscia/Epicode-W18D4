@@ -2,6 +2,7 @@ package bertcoscia.Epicode_W18D4.payloads;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,6 @@ public record NewAuthorDTO(
         @NotEmpty(message = "Email required")
         @Email(message = "Insert a valid email")
         String email,
-        @NotEmpty(message = "Date of birth required")
+        @NotNull(message = "Date of birth required") // NotEmpty si usa solo con numeri e stringhe
         LocalDate birthDate
 ) {}

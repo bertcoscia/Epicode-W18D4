@@ -44,7 +44,7 @@ public class PostsController {
         if (validationResult.hasErrors()) {
             String messages = validationResult.getAllErrors().stream()
                     .map(ObjectError::getDefaultMessage)
-                    .collect(Collectors.joining(".\n"));
+                    .collect(Collectors.joining(". "));
             throw new BadRequestException(messages);
         } else {
             return new NewPostRespDTO(this.postsService.save(body).getId());

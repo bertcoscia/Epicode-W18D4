@@ -35,7 +35,7 @@ public class AuthorsController {
         if (validationResult.hasErrors()) {
             String messages = validationResult.getAllErrors().stream()
                     .map(ObjectError::getDefaultMessage)
-                    .collect(Collectors.joining(". \n"));
+                    .collect(Collectors.joining(". "));
             throw new BadRequestException(messages);
         } else {
             return new NewAuthorRespDTO(this.authorsService.save(body).getId());
