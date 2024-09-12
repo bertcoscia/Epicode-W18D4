@@ -14,6 +14,6 @@ public record NewAuthorDTO(
         @NotEmpty(message = "Email required")
         @Email(message = "Insert a valid email")
         String email,
-        @NotNull(message = "Date of birth required") // NotEmpty si usa solo con numeri e stringhe
+        @NotNull(message = "Date of birth required") // NotEmpty si usa solo con numeri e collections
         LocalDate birthDate
 ) {}

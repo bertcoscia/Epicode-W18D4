@@ -3,6 +3,7 @@ package bertcoscia.Epicode_W18D4.payloads;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
@@ -13,10 +14,8 @@ public record NewPostDTO(
         String title,
         @NotEmpty(message = "Content required")
         String content,
-        @NotEmpty(message = "Reading time required")
-                @Min(1)
-                @Max(15)
+        @NotNull(message = "Reading time required")
         int readingTime,
-        @NotEmpty(message = "Author id required")
+        @NotNull(message = "Author id required")
         UUID authorId
 ) {}
