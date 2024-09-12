@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EpicodeW18D3Application {
+public class EpicodeW18D4Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EpicodeW18D3Application.class, args);
+		SpringApplication.run(EpicodeW18D4Application.class, args);
 	}
 
 }

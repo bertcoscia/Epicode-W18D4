@@ -25,4 +25,10 @@ public class Author {
     @Column(name = "avatar_url")
     private String avatarUrl;
 
+    public Author(String name, String surname, String email, LocalDate birthDate) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.birthDate = birthDate;
+    }
 }

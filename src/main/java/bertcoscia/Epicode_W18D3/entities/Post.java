@@ -18,8 +18,7 @@ public class Post {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     private UUID id;
-    @Enumerated(EnumType.STRING)
-    private PostCategory category;
+    private String category;
     private String title;
     @Column(name = "cover_url")
     private String coverUrl;
@@ -30,7 +29,7 @@ public class Post {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    public Post(PostCategory category, String title, String content, int readingTime, Author author) {
+    public Post(String category, String title, String content, int readingTime, Author author) {
         this.category = category;
         this.title = title;
         this.content = content;

@@ -1,13 +1,20 @@
 package bertcoscia.Epicode_W18D3.controllers;
 
 import bertcoscia.Epicode_W18D3.entities.Author;
+import bertcoscia.Epicode_W18D3.exceptions.BadRequestException;
+import bertcoscia.Epicode_W18D3.payloads.NewAuthorDTO;
+import bertcoscia.Epicode_W18D3.payloads.NewAuthorRespDTO;
 import bertcoscia.Epicode_W18D3.services.AuthorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/authors")
@@ -24,8 +31,15 @@ public class AuthorsController {
     // POST http://localhost:3001/authors + body
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Author save(@RequestBody Author body) {
-        return this.authorsService.save(body);
+    public NewAuthorRespDTO save(@RequestBody @Validated NewAuthorDTO body, BindingResult validationResult) {
+        if (validationResult.hasErrors()) {
+            String messages = validationResult.getAllErrors().stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.joining(". \n"));
+            throw new BadRequestException(messages);
+        } else {
+            return new NewAuthorRespDTO(this.authorsService.save(body).getId());
+        }
     }
 
     // GET http://localhost:3001/authors/{authorId}
