@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>bertcoscia</groupId>
-	<artifactId>Epicode-W18D4</artifactId>
+	<artifactId>Epicode-W18D3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Epicode-W18D4</name>
+	<name>Epicode-W18D3</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>

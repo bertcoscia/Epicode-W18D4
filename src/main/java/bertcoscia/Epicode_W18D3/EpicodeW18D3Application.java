@@ -1,13 +1,13 @@
-package bertcoscia.Epicode_W18D4;
+package bertcoscia.Epicode_W18D3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EpicodeW18D4Application {
+public class EpicodeW18D3Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EpicodeW18D4Application.class, args);
+		SpringApplication.run(EpicodeW18D3Application.class, args);
 	}
 
 }
