@@ -12,7 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -64,5 +66,10 @@ public class PostsController {
         this.postsService.findByIdAndDelete(postId);
     }
 
+    // POST http://localhost:3001/blogPosts/{postId}/cover
+    @PostMapping("/{postId}/cover")
+    public void uploadCover(@RequestParam("cover")MultipartFile image, @PathVariable UUID postId) throws IOException {
+        this.postsService.uploadImage(image, postId);
+    }
 
 }
