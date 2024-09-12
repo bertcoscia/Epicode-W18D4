@@ -67,8 +67,8 @@ public class PostsService {
     }
 
     public void uploadImage(MultipartFile file, UUID postId) throws IOException {
-        String url = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         Post found = this.findById(postId);
+        String url = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         found.setCoverUrl(url);
         this.postsRepository.save(found);
     }

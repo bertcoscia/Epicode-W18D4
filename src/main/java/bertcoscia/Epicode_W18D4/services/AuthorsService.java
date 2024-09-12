@@ -57,8 +57,8 @@ public class AuthorsService {
     }
 
     public void uploadImage(MultipartFile file, UUID authorId) throws IOException {
-        String url = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         Author found = this.findById(authorId);
+        String url = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         found.setAvatarUrl(url);
         this.authorsRepository.save(found);
     }
