@@ -11,7 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -60,4 +62,11 @@ public class AuthorsController {
     public void findByIdAndDelete(@PathVariable UUID authorId) {
         this.authorsService.findByIdAndDelete(authorId);
     }
+
+    // POST http://localhost:3001/authors/{authorId}/avatar
+    @PostMapping("/{authorId}/avatar")
+    public void uploadAvatar(@RequestParam("avatar") MultipartFile image, @PathVariable UUID authorId) throws IOException {
+        this.authorsService.uploadImage(image, authorId);
+    }
+
 }

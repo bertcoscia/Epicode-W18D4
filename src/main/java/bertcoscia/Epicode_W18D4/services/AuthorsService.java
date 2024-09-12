@@ -5,16 +5,25 @@ import bertcoscia.Epicode_W18D4.exceptions.BadRequestException;
 import bertcoscia.Epicode_W18D4.exceptions.NotFoundException;
 import bertcoscia.Epicode_W18D4.payloads.NewAuthorDTO;
 import bertcoscia.Epicode_W18D4.repositories.AuthorsRepository;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+
+import static com.cloudinary.utils.ObjectUtils.emptyMap;
 
 @Service
 public class AuthorsService {
     @Autowired
     private AuthorsRepository authorsRepository;
+
+    @Autowired
+    private Cloudinary cloudinaryUploader;
 
     public Author save(NewAuthorDTO body) {
         if (this.authorsRepository.existsByEmail(body.email())) throw new BadRequestException("Email already used");
@@ -45,6 +54,13 @@ public class AuthorsService {
     public void findByIdAndDelete(UUID id) {
         Author found = this.findById(id);
         this.authorsRepository.delete(found);
+    }
+
+    public void uploadImage(MultipartFile file, UUID authorId) throws IOException {
+        String url = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        Author found = this.findById(authorId);
+        found.setAvatarUrl(url);
+        this.authorsRepository.save(found);
     }
 
 
