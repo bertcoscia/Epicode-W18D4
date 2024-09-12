@@ -1,10 +1,10 @@
-package bertcoscia.Epicode_W18D3.controllers;
+package bertcoscia.Epicode_W18D4.controllers;
 
-import bertcoscia.Epicode_W18D3.entities.Author;
-import bertcoscia.Epicode_W18D3.exceptions.BadRequestException;
-import bertcoscia.Epicode_W18D3.payloads.NewAuthorDTO;
-import bertcoscia.Epicode_W18D3.payloads.NewAuthorRespDTO;
-import bertcoscia.Epicode_W18D3.services.AuthorsService;
+import bertcoscia.Epicode_W18D4.entities.Author;
+import bertcoscia.Epicode_W18D4.exceptions.BadRequestException;
+import bertcoscia.Epicode_W18D4.payloads.NewAuthorDTO;
+import bertcoscia.Epicode_W18D4.payloads.NewAuthorRespDTO;
+import bertcoscia.Epicode_W18D4.services.AuthorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;

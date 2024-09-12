@@ -1,4 +1,4 @@
-package bertcoscia.Epicode_W18D3.payloads;
+package bertcoscia.Epicode_W18D4.payloads;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

@@ -1,11 +1,11 @@
-package bertcoscia.Epicode_W18D3.services;
+package bertcoscia.Epicode_W18D4.services;
 
-import bertcoscia.Epicode_W18D3.entities.Author;
-import bertcoscia.Epicode_W18D3.entities.Post;
-import bertcoscia.Epicode_W18D3.exceptions.BadRequestException;
-import bertcoscia.Epicode_W18D3.exceptions.NotFoundException;
-import bertcoscia.Epicode_W18D3.payloads.PostsPayload;
-import bertcoscia.Epicode_W18D3.repositories.PostsRepository;
+import bertcoscia.Epicode_W18D4.entities.Author;
+import bertcoscia.Epicode_W18D4.entities.Post;
+import bertcoscia.Epicode_W18D4.exceptions.BadRequestException;
+import bertcoscia.Epicode_W18D4.exceptions.NotFoundException;
+import bertcoscia.Epicode_W18D4.payloads.NewPostDTO;
+import bertcoscia.Epicode_W18D4.repositories.PostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,15 +24,12 @@ public class PostsService {
     @Autowired
     private AuthorsService authorsService;
 
-    public Post createPost(PostsPayload payload) {
-        Author author = authorsService.findById(payload.getAuthorId());
-        return new Post(payload.getCategory(), payload.getTitle(), payload.getContent(), payload.getReadingTime(), author);
-    }
-
-    public Post save(Post body) {
-        if (body.getId() == null && this.postsRepository.existsByTitle(body.getTitle())) throw new BadRequestException("There is already a post with the title " + body.getTitle());
-        body.setCoverUrl("https://picsum.photos/200/300");
-        return this.postsRepository.save(body);
+    public Post save(NewPostDTO body) {
+        if (this.postsRepository.existsByTitle(body.title())) throw new BadRequestException("There is already a post with the title " + body.title());
+        Author author = this.authorsService.findById(body.authorId());
+        Post newPost = new Post(body.category(), body.title(), body.content(), body.readingTime(), author);
+        newPost.setCoverUrl("https://picsum.photos/200/300");
+        return this.postsRepository.save(newPost);
     }
 
     public Page<Post> findAll(int page, int size, String sortBy) {
@@ -54,7 +51,7 @@ public class PostsService {
         found.setTitle(body.getTitle());
         found.setContent(body.getContent());
         found.setReadingTime(body.getReadingTime());
-        return this.save(found);
+        return this.postsRepository.save(found);
     }
 
     public void findByIdAndDelete(UUID id) {

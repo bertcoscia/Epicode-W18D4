@@ -1,14 +1,20 @@
-package bertcoscia.Epicode_W18D3.controllers;
+package bertcoscia.Epicode_W18D4.controllers;
 
-import bertcoscia.Epicode_W18D3.entities.Post;
-import bertcoscia.Epicode_W18D3.payloads.PostsPayload;
-import bertcoscia.Epicode_W18D3.services.PostsService;
+import bertcoscia.Epicode_W18D4.entities.Post;
+import bertcoscia.Epicode_W18D4.exceptions.BadRequestException;
+import bertcoscia.Epicode_W18D4.payloads.NewPostDTO;
+import bertcoscia.Epicode_W18D4.payloads.NewPostRespDTO;
+import bertcoscia.Epicode_W18D4.services.PostsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/blogPosts")
@@ -34,15 +40,20 @@ public class PostsController {
     // POST http://localhost:3001/blogPosts + body
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Post save(@RequestBody PostsPayload payload) {
-        Post body = this.postsService.createPost(payload);
-        return this.postsService.save(body);
+    public NewPostRespDTO save(@RequestBody @Validated NewPostDTO body, BindingResult validationResult) {
+        if (validationResult.hasErrors()) {
+            String messages = validationResult.getAllErrors().stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.joining(".\n"));
+            throw new BadRequestException(messages);
+        } else {
+            return new NewPostRespDTO(this.postsService.save(body).getId());
+        }
     }
 
     // PUT http://localhost:3001/blogPosts/{postId} + body
     @PutMapping("/{postId}")
-    public Post findByIdAndUpdate(@PathVariable UUID postId, @RequestBody PostsPayload payload) {
-        Post body = this.postsService.createPost(payload);
+    public Post findByIdAndUpdate(@PathVariable UUID postId, @RequestBody Post body) {
         return this.postsService.findByIdAndUpdate(postId, body);
     }
 

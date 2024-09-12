@@ -1,7 +1,7 @@
-package bertcoscia.Epicode_W18D3.entities;
+package bertcoscia.Epicode_W18D4.entities;
 
-import bertcoscia.Epicode_W18D3.enums.PostCategory;
-import bertcoscia.Epicode_W18D3.payloads.PostsPayload;
+import bertcoscia.Epicode_W18D4.enums.PostCategory;
+import bertcoscia.Epicode_W18D4.payloads.PostsPayload;
 import jakarta.persistence.*;
 import lombok.*;
 

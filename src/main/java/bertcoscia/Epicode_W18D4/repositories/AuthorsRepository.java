@@ -1,6 +1,6 @@
-package bertcoscia.Epicode_W18D3.repositories;
+package bertcoscia.Epicode_W18D4.repositories;
 
-import bertcoscia.Epicode_W18D3.entities.Author;
+import bertcoscia.Epicode_W18D4.entities.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package bertcoscia.Epicode_W18D3.exceptions;
+package bertcoscia.Epicode_W18D4.exceptions;
 
-import bertcoscia.Epicode_W18D3.payloads.ErrorsResponseDTO;
+import bertcoscia.Epicode_W18D4.payloads.ErrorsResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

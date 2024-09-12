@@ -1,4 +1,4 @@
-package bertcoscia.Epicode_W18D3.entities;
+package bertcoscia.Epicode_W18D4.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
